@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Strict//EN">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<style type="text/css">
+
+A { font-family:Verdana, Arial; font-size:9.0pt; }
+A:visited { color:#0000FF }
+
+U { cursor:hand }
+P { font-family:Verdana, Arial; font-size:9.0pt; }
+HR { color:#527573; height:1px }
+TD { font-family:Verdana, Arial; font-size:9.0pt; }
+DIV { color:blue; text-decoration:none; font-family:Verdana, Arial; font-size:9.0pt; }
+DIV DIV { color:black; cursor:text; display:none; text-decoration:none }
+DIV DIV DIV { color:blue; cursor:text; display:block; font-family:Verdana,Arial; font-size:9.0pt; }
+DIV DIV DIV DIV { color:black; cursor:text; display:none; text-decoration:none }
+
+.header { background-color:#D8D8D8; color:#E37920; height:50px; padding-left:8px; }
+.content { padding:10px }
+
+</style>
+
+<script>
+
+/*- replace <app_name></app_name> with application name ---------------------*/
+/*- use the 6 useful IDs below-----------------------------------------------*/
+/*- summary------------------------------------------------------------------*/
+/*- detail-------------------------------------------------------------------*/
+/*- binary: the clickable for displaying binary data-------------------------*/
+/*- binary_data--------------------------------------------------------------*/
+/*- exception: the clickable for exception-----------------------------------*/
+/*- exception_data-----------------------------------------------------------*/
+
+function handleClick()
+{
+	el=event.srcElement;
+	if (el.id!="clickable") 
+		return; 
+	if (!changeSetting(el,"binary",true) && !changeSetting(el,"exception",true)) 
+		changeSetting(el,"summary",true);
+	event.cancelBubble=true
+}
+
+function changeSetting(el,id,toggle)
+{ 
+	while (true)
+	{ 
+		if (el==null) 
+			return false;
+		if (el.id==id) 
+			break; 
+		el=el.parentElement;
+	}
+	els=el.children; 
+	for(i = 0;i<els.length;i++)
+	{
+		el=els[i]; 
+		st=el.style; 
+		if (el.id=="clickable")
+			continue; 
+		if((""==st.display)||(!toggle))
+		{
+			st.display="block"; 
+			if (toggle&&(id=="summary")) 
+				el.parentElement.scrollIntoView(true);
+		}
+		else 
+			st.display=""
+	} 
+	return true;
+}
+
+function toggle(a)
+{
+  for(var i = 0; i < a.parentNode.childNodes.length; i++)
+  {
+   var n = a.parentNode.childNodes[i];
+   if(n.id == "detail" || n.id == "binary_data" || n.id == "exception_data")
+    {
+     if(n.style.display != "block")
+     {
+       n.style.display = "block";
+     }
+     else
+     {
+       n.style.display = "none";
+     }
+     if(n.id == "detail")
+     {
+       a.parentNode.scrollIntoView(true);
+      }
+     }
+  }
+}
+
+function openSelected()
+{ 
+	s = document.selection; 
+	if ((s == null) || (s.type != "Text")) 
+		return; 
+	p=s.createRange().parentElement(); 
+	if ((p==null)||(p.parentElement==null))
+		return; 
+	p=p.parentElement.parentElement; 
+	changeSetting(p,"summary",false); 
+	changeSetting(p,"binary",false);
+	changeSetting(p,"exception",false);
+}
+
+document.onclick=handleClick
+
+</script>
+</head>
+
+<body leftmargin="0" topmargin="0">
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td class="header" valign="middle">
+			<table width="100%" cellspacing="2" cellpadding="0" border="0">
+				<tr>
+					<td valign="top" width="145"><strong>Application:</strong></td>
+					<td><app_name></app_name></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="content">
+		
+

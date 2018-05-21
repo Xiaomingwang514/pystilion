@@ -160,12 +160,6 @@ class Trace (object):
                     output.append( binary[p:p+1].decode('ascii') )
             output.append('\n')
         return ''.join(output)
-    
-if __name__ == "__main__":
-    trace = Trace("./trace", "pyNidServer", "./config/trace_header.ht_", "./config/trace_trailer.ht_")
-    trace.log("aaaa<>a")
-    trace.log("accc", "bbbb<b")
-    trace.log("ac'c", "bbbbbb", b'\x38\x32\x36\x38\x32\x36\x38\x32\x36\x38\x32\x36\x38\x32\x36\x38\x32\x36')
-    trace.log("accc", "bbbbb>b", b'\x80\x32\x36',"ddddddddddddd")
+
 
     

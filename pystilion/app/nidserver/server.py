@@ -88,9 +88,9 @@ def main():
     print ("INFO: Starting server at {}:{}".format(HOST,str(PORT)))
     server = ThreadedNidServer((HOST, PORT), NidServerHandler)
     server.allow_reuse_address=True
-    #pass the current_trace to server
+    # pass the current_trace to server
     server.trace = trace
-    #pass the config to server
+    # pass the config to server
     server.config = config    
     server_thread = threading.Thread(target=server.serve_forever)
     server_thread.daemon = True

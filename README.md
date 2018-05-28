@@ -29,7 +29,8 @@ This is an example TCP/IP server processing transactions from Postilion Realtime
 It accepts transactions and passes to a python script, where business logic can
 be placed. 
 
-To start the server use the following command.
+To start the server, make sure current path "." is included in PYTHONPATH system varible 
+and use the following command to start the server.
 
 python .\pystilion\app\nidserver\server.py [configFile]
 
